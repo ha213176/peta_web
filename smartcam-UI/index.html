@@ -1,0 +1,127 @@
+<!doctype html>
+
+<script src="./layout.js"></script>
+<script src="./process.js"></script>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- 刷新網頁 -->
+    <!-- <meta http-equiv="refresh" content="20"> -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>
+        kv260
+    </title>
+</head>
+<body style="background-color: whitesmoke;">
+    <div style="background-color: #ECEBEA;">
+    <button type="button" class="app_button" id="smartcam_button" onclick="show_smartcam()">
+        smartcam</button>
+    <button type="button" class="app_button" id="reid_button" onclick="show_reid()">
+        aibox-reid</button>
+    </div>
+    <div id="smartcam_block" class="app_block" style="">
+    <form name="smart_form" id="smart_form" action="" method="">
+            <p>輸入來源:</p>
+            <select name="input_type" id="input_type" onchange="show_input_value(this)">
+                <option selected="selected" value="#">請選擇</option>
+                <option value="usb">USB camera</option>
+                <option value="MIPI camera">MIPI camera</option>
+                <option value="File">FILE</option>
+                
+                <input id="SCFileSrcInput" type="text" style="display: none;" placeholder="請輸入檔案位置">
+            </select>
+            
+            <br>
+            <p>輸入影片大小:</p>
+            <select name="width">
+                <option value="width1" id="width1">1920</option>
+            </select>
+            <select name="height">
+                <option value="height1" id="height1">1080</option>
+            </select>
+            
+            <br>
+            <p>選擇模型:</p>
+            <select name="model" id="smartcam_model">
+                <option selected="selected" value="#">請選擇</option>
+                <option value="facedetect">facedetect</option>
+                <option value="ssd">ssd</option>
+                <option value="refinedet">refinedet</option>
+            </select>
+
+            <br>
+            <p>輸出格式:</p>
+            <select name="output" id="output">
+                <option selected="selected" value="#">請選擇</option>
+                <option value="dp">DP</option>
+                <option value="rtsp">RTSP</option>
+                <option value="file">FILE</option>
+            </select>
+    </form>
+    </div>
+    
+    <div id="reid_block" style="display: none;">
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <p>輸出格式:</p>
+
+            <p>輸入1</p>
+            <select name="reidSrc" id="reidSrc0">
+                <option value="FILE">FILE</option>
+                <option value="RTSP">RTSP</option>
+            </select>
+            <input type="text" id="reidText0" placeholder="請輸入來源">
+            <br>
+
+            <p>輸入2</p>
+            <select name="reidSrc" id="reidSrc1">
+                <option selected="selected" value="#">不啟用</option>
+                <option value="FILE">FILE</option>
+                <option value="RTSP">RTSP</option>
+            </select>
+            <input type="text" id="reidText1" placeholder="請輸入來源">
+            <br>
+
+            <p>輸入3</p>
+            <select name="reidSrc" id="reidSrc2">
+                <option selected="selected" value="#">不啟用</option>
+                <option value="FILE">FILE</option>
+                <option value="RTSP">RTSP</option>
+            </select>
+            <input type="text" id="reidText2" placeholder="請輸入來源">
+            <br>
+
+            <p>輸入4</p>
+            <select name="reidSrc" id="reidSrc3">
+                <option selected="selected" value="#">不啟用</option>
+                <option value="FILE">FILE</option>
+                <option value="RTSP">RTSP</option>
+            </select>
+            <input type="text" id="reidText3" placeholder="請輸入來源">
+        </form>
+    </div>
+
+    <br>
+    <button type="button" id="RUN" class="p_button" onclick="run()">RUN</button>
+    <button type="button" id="QUIT" class="p_button" onclick="quit()">QUIT</button>
+
+    <!-- <video id="test_video" controls autoplay src="rtsp://10.1.1.12:554/test"  width="1920" height="1080"></video> -->
+<!-- 
+    <video id="video" autoplay="true" controls="controls" type='application/x-mpegURL' style="display: none;"></video>
+    <script>
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        // bind them together
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+            console.log("video and hls.js are now bound together !");
+            hls.loadSource("http://10.1.1.12:8080/playlist.m3u8");
+            hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+            });
+        });
+    } -->
+    </script>
+
+
+</body>
